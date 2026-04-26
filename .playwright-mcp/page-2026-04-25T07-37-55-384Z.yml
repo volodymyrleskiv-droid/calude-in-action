@@ -1,0 +1,146 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - heading "React Component Generator" [level=1] [ref=e7]
+      - generic [ref=e9]:
+        - generic [ref=e53]:
+          - generic [ref=e54]:
+            - generic [ref=e57]: Create a pricing card component with a plan name, price, list of features, and a call-to-action button
+            - img [ref=e60]
+          - generic [ref=e83]:
+            - img [ref=e86]
+            - generic [ref=e91]:
+              - generic [ref=e94]: Creating /App.jsx
+              - separator [ref=e95]
+              - paragraph [ref=e97]: "Now let me create the PricingCard component:"
+              - generic [ref=e100]: Creating /components/PricingCard.jsx
+              - separator [ref=e101]
+              - generic [ref=e102]:
+                - paragraph [ref=e103]: "Done! I've created a pricing card component with:"
+                - list [ref=e104]:
+                  - listitem [ref=e105]:
+                    - strong [ref=e106]: Plan name
+                    - text: and description
+                  - listitem [ref=e107]:
+                    - strong [ref=e108]: Price
+                    - text: display (supports custom pricing)
+                  - listitem [ref=e109]:
+                    - strong [ref=e110]: Feature list
+                    - text: with custom checkmark icons
+                  - listitem [ref=e111]:
+                    - strong [ref=e112]: CTA button
+                    - text: with primary/secondary variants
+                  - listitem [ref=e113]:
+                    - strong [ref=e114]: Highlighted state
+                    - text: for featured plans (with "Most Popular" badge, ring, and scale effect)
+                  - listitem [ref=e115]:
+                    - strong [ref=e116]: Warm color palette
+                    - text: (orange/amber) instead of generic blue
+                  - listitem [ref=e117]:
+                    - strong [ref=e118]: Structured design
+                    - text: with accent bars and custom iconography
+                - paragraph [ref=e119]: The App.jsx shows three example cards with different configurations.
+        - generic [ref=e20]:
+          - textbox "Describe the React component you want to create..." [ref=e21]
+          - button [disabled] [ref=e22]:
+            - img [ref=e23]
+    - separator [ref=e26]
+    - generic [ref=e28]:
+      - generic [ref=e29]:
+        - tablist [ref=e31]:
+          - tab "Preview" [selected] [ref=e32]
+          - tab "Code" [ref=e33]
+        - generic [ref=e34]:
+          - button "Sign In" [ref=e35]
+          - button "Sign Up" [ref=e36]
+      - iframe [ref=e82]:
+        - generic [ref=f6e4]:
+          - generic [ref=f6e5]:
+            - heading "Simple, Transparent Pricing" [level=1] [ref=f6e6]
+            - paragraph [ref=f6e7]: Choose the plan that works for you
+          - generic [ref=f6e8]:
+            - generic [ref=f6e11]:
+              - generic [ref=f6e12]:
+                - heading "Starter" [level=3] [ref=f6e13]
+                - paragraph [ref=f6e14]: Perfect for getting started
+              - generic [ref=f6e16]:
+                - generic [ref=f6e17]: "29"
+                - generic [ref=f6e18]: /month
+              - list [ref=f6e20]:
+                - listitem [ref=f6e21]:
+                  - img [ref=f6e24]
+                  - generic [ref=f6e26]: Up to 10 projects
+                - listitem [ref=f6e27]:
+                  - img [ref=f6e30]
+                  - generic [ref=f6e32]: Basic analytics
+                - listitem [ref=f6e33]:
+                  - img [ref=f6e36]
+                  - generic [ref=f6e38]: Community support
+                - listitem [ref=f6e39]:
+                  - img [ref=f6e42]
+                  - generic [ref=f6e44]: 1 GB storage
+                - listitem [ref=f6e45]:
+                  - img [ref=f6e48]
+                  - generic [ref=f6e50]: Core features
+              - button "Get Started" [ref=f6e51] [cursor=pointer]
+            - generic [ref=f6e52]:
+              - generic [ref=f6e54]: Most Popular
+              - generic [ref=f6e55]:
+                - generic [ref=f6e56]:
+                  - heading "Professional" [level=3] [ref=f6e57]
+                  - paragraph [ref=f6e58]: For growing teams
+                - generic [ref=f6e60]:
+                  - generic [ref=f6e61]: "79"
+                  - generic [ref=f6e62]: /month
+                - list [ref=f6e64]:
+                  - listitem [ref=f6e65]:
+                    - img [ref=f6e68]
+                    - generic [ref=f6e70]: Unlimited projects
+                  - listitem [ref=f6e71]:
+                    - img [ref=f6e74]
+                    - generic [ref=f6e76]: Advanced analytics
+                  - listitem [ref=f6e77]:
+                    - img [ref=f6e80]
+                    - generic [ref=f6e82]: Priority support
+                  - listitem [ref=f6e83]:
+                    - img [ref=f6e86]
+                    - generic [ref=f6e88]: 100 GB storage
+                  - listitem [ref=f6e89]:
+                    - img [ref=f6e92]
+                    - generic [ref=f6e94]: All core features
+                  - listitem [ref=f6e95]:
+                    - img [ref=f6e98]
+                    - generic [ref=f6e100]: Custom integrations
+                  - listitem [ref=f6e101]:
+                    - img [ref=f6e104]
+                    - generic [ref=f6e106]: Team collaboration
+                - button "Start Free Trial" [ref=f6e107] [cursor=pointer]
+            - generic [ref=f6e110]:
+              - generic [ref=f6e111]:
+                - heading "Enterprise" [level=3] [ref=f6e112]
+                - paragraph [ref=f6e113]: For large organizations
+              - generic [ref=f6e116]: Custom
+              - list [ref=f6e118]:
+                - listitem [ref=f6e119]:
+                  - img [ref=f6e122]
+                  - generic [ref=f6e124]: Everything in Professional
+                - listitem [ref=f6e125]:
+                  - img [ref=f6e128]
+                  - generic [ref=f6e130]: Dedicated account manager
+                - listitem [ref=f6e131]:
+                  - img [ref=f6e134]
+                  - generic [ref=f6e136]: Custom SLA
+                - listitem [ref=f6e137]:
+                  - img [ref=f6e140]
+                  - generic [ref=f6e142]: Unlimited storage
+                - listitem [ref=f6e143]:
+                  - img [ref=f6e146]
+                  - generic [ref=f6e148]: Advanced security
+                - listitem [ref=f6e149]:
+                  - img [ref=f6e152]
+                  - generic [ref=f6e154]: White-label options
+                - listitem [ref=f6e155]:
+                  - img [ref=f6e158]
+                  - generic [ref=f6e160]: API access
+              - button "Contact Sales" [ref=f6e161] [cursor=pointer]
+  - alert [ref=e47]

@@ -1,5 +1,5 @@
-import { test, expect } from "vitest";
-import { VirtualFileSystem } from "@/lib/file-system";
+import { describe, test, expect } from "vitest";
+import { VirtualFileSystem, fileSystem } from "@/lib/file-system";
 
 test("creates a new file system with root directory", () => {
   const fs = new VirtualFileSystem();
@@ -674,4 +674,141 @@ test("rename handles empty directories", () => {
   expect(fs.exists("/empty-dir")).toBe(false);
   expect(fs.exists("/moved-empty-dir")).toBe(true);
   expect(fs.getNode("/moved-empty-dir")?.type).toBe("directory");
+});
+
+describe("reset", () => {
+  test("clears all files and restores root", () => {
+    const fs = new VirtualFileSystem();
+    fs.createFile("/test.txt", "content");
+    fs.createDirectory("/src");
+    fs.createFile("/src/index.ts", "export {}");
+
+    fs.reset();
+
+    expect(fs.exists("/")).toBe(true);
+    expect(fs.exists("/test.txt")).toBe(false);
+    expect(fs.exists("/src")).toBe(false);
+    expect(fs.listDirectory("/")).toEqual([]);
+  });
+
+  test("allows creating files after reset", () => {
+    const fs = new VirtualFileSystem();
+    fs.createFile("/before.txt", "before");
+    fs.reset();
+
+    const file = fs.createFile("/after.txt", "after");
+    expect(file).toBeDefined();
+    expect(fs.readFile("/after.txt")).toBe("after");
+    expect(fs.exists("/before.txt")).toBe(false);
+  });
+});
+
+describe("createDirectory", () => {
+  test("returns null when parent directory does not exist", () => {
+    const fs = new VirtualFileSystem();
+    const result = fs.createDirectory("/nonexistent/child");
+    expect(result).toBeNull();
+  });
+});
+
+describe("getNode", () => {
+  test("returns null for a non-existent path", () => {
+    const fs = new VirtualFileSystem();
+    expect(fs.getNode("/missing")).toBeNull();
+  });
+
+  test("returns the node for an existing file", () => {
+    const fs = new VirtualFileSystem();
+    fs.createFile("/hello.txt", "hi");
+    const node = fs.getNode("/hello.txt");
+    expect(node?.type).toBe("file");
+    expect(node?.content).toBe("hi");
+  });
+
+  test("returns the node for an existing directory", () => {
+    const fs = new VirtualFileSystem();
+    fs.createDirectory("/src");
+    const node = fs.getNode("/src");
+    expect(node?.type).toBe("directory");
+  });
+});
+
+describe("replaceInFile with regex special characters", () => {
+  test("treats oldStr as a literal string, not a regex", () => {
+    const fs = new VirtualFileSystem();
+    fs.createFile("/test.txt", "price is $10.00 and $20.00");
+
+    const result = fs.replaceInFile("/test.txt", "$10.00", "€10.00");
+
+    expect(result).toBe("Replaced 1 occurrence(s) of the string in /test.txt");
+    expect(fs.readFile("/test.txt")).toBe("price is €10.00 and $20.00");
+  });
+
+  test("handles brackets and parens in oldStr", () => {
+    const fs = new VirtualFileSystem();
+    fs.createFile("/test.txt", "call foo(bar) and foo(baz)");
+
+    const result = fs.replaceInFile("/test.txt", "foo(bar)", "fn(bar)");
+
+    expect(result).toBe("Replaced 1 occurrence(s) of the string in /test.txt");
+    expect(fs.readFile("/test.txt")).toBe("call fn(bar) and foo(baz)");
+  });
+});
+
+describe("viewFile edge cases", () => {
+  test("returns error for non-existent path via getNode", () => {
+    const fs = new VirtualFileSystem();
+    expect(fs.viewFile("/does-not-exist.txt")).toBe(
+      "File not found: /does-not-exist.txt"
+    );
+  });
+
+  test("clamps view range start below 1 to line 1", () => {
+    const fs = new VirtualFileSystem();
+    fs.createFile("/test.txt", "a\nb\nc");
+
+    const view = fs.viewFile("/test.txt", [0, 2]);
+    expect(view).toBe("1\ta\n2\tb");
+  });
+
+  test("clamps view range end beyond file length", () => {
+    const fs = new VirtualFileSystem();
+    fs.createFile("/test.txt", "a\nb\nc");
+
+    const view = fs.viewFile("/test.txt", [2, 100]);
+    expect(view).toBe("2\tb\n3\tc");
+  });
+
+  test("shows a single-line range", () => {
+    const fs = new VirtualFileSystem();
+    fs.createFile("/test.txt", "a\nb\nc");
+
+    const view = fs.viewFile("/test.txt", [2, 2]);
+    expect(view).toBe("2\tb");
+  });
+});
+
+describe("serialize", () => {
+  test("does not include children Map on directory nodes", () => {
+    const fs = new VirtualFileSystem();
+    fs.createDirectory("/src");
+    fs.createFile("/src/index.ts", "");
+
+    const serialized = fs.serialize();
+
+    expect((serialized["/src"] as any).children).toBeUndefined();
+  });
+});
+
+describe("getAllFiles", () => {
+  test("returns empty map when no files exist", () => {
+    const fs = new VirtualFileSystem();
+    expect(fs.getAllFiles().size).toBe(0);
+  });
+});
+
+describe("fileSystem singleton", () => {
+  test("is an instance of VirtualFileSystem", () => {
+    expect(fileSystem).toBeInstanceOf(VirtualFileSystem);
+  });
 });
